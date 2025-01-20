@@ -1,9 +1,8 @@
 
 let numeroSecreto = 0;
 let intentos = 0;
-let listaNummerosSorteados = [];
-let nummeroMaximo = 10;
-
+let listaNumerosSorteados = [];
+let numeroMaximo = 10;
 
 function asignarTextoElemento(elemento, texto) {
     let elementoHTML = document.querySelector(elemento)
@@ -34,24 +33,30 @@ function limpiarCaja() {
 }
 
 function generarNumeroSecreto() {
-    let numeroGenerado = Math.floor(Math.random() * nummeroMaximo) + 1;
+    let numeroGenerado = Math.floor(Math.random()*numeroMaximo)+1;
+    
+    console.log(numeroGenerado);
+    console.log(listaNumerosSorteados);
+
     //Si ya sorteamos todos los números posibles
-    if (listaNummerosSorteados.length === nummeroMaximo) {
+    if (listaNumerosSorteados.length == numeroMaximo) {
         asignarTextoElemento("p", "Ya se sortearon todos los números posibles.");
+    } else {
     //Si el número generado esta incluido en la lista
-    if (listaNummerosSorteados.includes(numeroGenerado)) {
+    if (listaNumerosSorteados.includes(numeroGenerado)) {
         return generarNumeroSecreto();
     } else {
-        listaNummerosSorteados.push(numeroGenerado);
+        listaNumerosSorteados.push(numeroGenerado);
         return numeroGenerado;
         }
     }
 }
 
 
+
 function condicionesIniciales() {
     asignarTextoElemento("h1", "Juego del número secreto");
-    asignarTextoElemento("p", `Adivina el número secreto que está entre 1 y ${nummeroMaximo}`);
+    asignarTextoElemento("p", `Adivina el número secreto que está entre 1 y ${numeroMaximo}`);
     numeroSecreto = generarNumeroSecreto();
     intentos = 1;
 }
